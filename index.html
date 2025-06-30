@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA VI Countdown</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            background: url('https://www.rockstargames.com/VI/_next/image?url=%2FVI%2F_next%2Fstatic%2Fmedia%2FJason_and_Lucia_02_landscape.8aced7fd.jpg&w=1920&q=75');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 4rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown {
+            color: white;
+            font-size: 4rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 400;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1rem 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .gta-logo-link {
+            display: inline-block;
+            transition: opacity 0.3s ease;
+        }
+
+        .gta-logo-link:hover {
+            opacity: 0.8;
+        }
+
+        .gta-logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .credit {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            font-weight: 400;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .credit:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .countdown-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .countdown {
+                font-size: 2.5rem;
+            }
+
+            .gta-logo {
+                height: 40px;
+            }
+
+            .logo-container {
+                bottom: 20px;
+            }
+
+            .credit {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <div class="countdown" id="countdown">
+            000 : 00 : 00 : 00
+        </div>
+    </div>
+
+    <div class="logo-container">
+        <a href="https://www.rockstargames.com/VI/downloads/artwork-wallpapers" target="_blank" class="gta-logo-link">
+            <img src="https://static.wikia.nocookie.net/gtawiki/images/1/18/Logo-GTAVI-White.svg/revision/latest/scale-to-width-down/250?cb=20250506151650" alt="GTA VI Logo" class="gta-logo">
+        </a>
+        <div>
+            <a href="https://bsky.app/profile/ashleyvlt.bsky.social" target="_blank" class="credit">Made by AshleyVLT</a>
+        </div>
+    </div>
+
+    <script>
+        const releaseDate = new Date('2026-05-26T00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = releaseDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').textContent = '000 : 00 : 00 : 00';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const formattedTime = `${days.toString().padStart(3, '0')} : ${hours.toString().padStart(2, '0')} : ${minutes.toString().padStart(2, '0')} : ${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('countdown').textContent = formattedTime;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
